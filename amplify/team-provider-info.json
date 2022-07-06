@@ -16,5 +16,23 @@
         "localseokit36dbac32": {}
       }
     }
+  },
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-localseokit-dev-225905-authRole",
+      "UnauthRoleArn": "arn:aws:iam::095060703121:role/amplify-localseokit-dev-225905-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::095060703121:role/amplify-localseokit-dev-225905-authRole",
+      "Region": "us-west-1",
+      "DeploymentBucketName": "amplify-localseokit-dev-225905-deployment",
+      "UnauthRoleName": "amplify-localseokit-dev-225905-unauthRole",
+      "StackName": "amplify-localseokit-dev-225905",
+      "StackId": "arn:aws:cloudformation:us-west-1:095060703121:stack/amplify-localseokit-dev-225905/d47fd220-fcf0-11ec-ac25-024bc06c22e5",
+      "AmplifyAppId": "dccxfp7fmf3ji"
+    },
+    "categories": {
+      "auth": {
+        "localseokit36dbac32": {}
+      }
+    }
   }
 }
