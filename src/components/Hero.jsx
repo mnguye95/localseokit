@@ -17,8 +17,8 @@ const Hero = () => {
                     loop
                 />
             </div>
-            <p className='pt-4 md:text-2xl text-xl font-bold text-gray-500'>Optimize your website to rank on Google faster!</p>
-            <button className='bg-[#00df9a] w-[200px] rounded-md font-medium mx-auto my-6 py-3 text-black'>Join Beta Launch</button>
+            <p className='py-4 px-2 md:text-2xl text-xl font-bold text-gray-500'>Optimize your website to rank on Google faster!</p>
+            <button className='bg-[#00df9a] w-[200px] rounded-md font-medium mx-auto my-3 py-3 text-black'>Join Beta Launch</button>
         </div>
     </div>
   )
