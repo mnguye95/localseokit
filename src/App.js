@@ -1,16 +1,19 @@
 import React from 'react';
-import FortySixty from './components/FortySixty';
-import Hero from './components/Hero';
-import NavBar from './components/NavBar';
-import Newsletter from './components/Newsletter';
+import { Route, Routes } from 'react-router-dom';
+import Signin from './pages/Signin';
+import Signup from './pages/Signup';
+
+import Front from './pages/Front';
+
 
 function App() {
   return (
     <div>
-      <NavBar/>
-      <Hero/>
-      <FortySixty/>
-      <Newsletter/>
+      <Routes>
+        <Route path='/' element={<Front/>}/>
+        <Route path='/signin' element={<Signin/>}/>
+        <Route path='/register' element={<Signup/>}/>
+      </Routes>
     </div>
   );
 }
