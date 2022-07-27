@@ -7,9 +7,8 @@ import NavBar from '../components/NavBar';
 import Newsletter from '../components/Newsletter';
 
 const Front = () => {
-  document.body.style.background = '#000300';
   return (
-    <div>
+    <div className='bg-[#000300]'>
       <NavBar/>
       <Hero/>
       <FortySixty/>

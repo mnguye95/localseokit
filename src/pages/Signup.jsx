@@ -5,7 +5,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import { UserAuth } from '../context/AuthContext';
 
 const Signup = () => {
-  document.body.style.background = '#EBF2F8';
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -47,7 +46,7 @@ const Signup = () => {
             </form>
           </div>
           <div className='mt-6 text-center'>
-            <Link className='underline font-bold text-[#00df9a]' to='/signin'>Already have an account? Login here</Link>
+            Already have an account? <Link className='underline font-bold text-[#00df9a]' to='/signin'>Login here</Link>
           </div>
         </div>
         <div className='col-span-1 w-full'>

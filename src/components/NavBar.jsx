@@ -29,8 +29,8 @@ const NavBar = () => {
             <Link to='/signin'><li className='p-4 mr-6'>Sign In</li></Link>
             <Link to='/register'><button className='bg-white text-black w-[200px] rounded-md font-medium mx-auto my-4 py-4'>Get Started</button></Link>
         </ul> : <ul className='hidden md:flex items-center float-right'>
-            <Link to='/account'><li className='p-4 mr-6'>Dashboard</li></Link>
-            <button onClick={handleLogOut} className='bg-white text-black w-[200px] rounded-md font-medium mx-auto my-4 py-4'>Sign Out</button>
+            <Link to='/account'><li className='p-4 mr-6'>Account</li></Link>
+            <Link to='/dashboard'><button className='bg-white text-black w-[200px] rounded-md font-medium mx-auto my-4 py-4'>Dashboard</button></Link>
         </ul> }
         
         <div onClick={handleNav} className='block cursor-pointer md:hidden'>
@@ -44,7 +44,7 @@ const NavBar = () => {
                 <li className='p-4'><Link to='/register'>Get Started</Link></li>
             </ul> : <ul className='uppercase p-4'>
                 <li className='p-4 border-b border-gray-600'><Link to='/dashboard'>Dashboard</Link></li>
-                <li className='p-4'><p onClick={handleLogOut}>Log out</p></li>
+                <li className='p-4'><Link to='/account'><p>Account</p></Link></li>
             </ul>}
         </div>
     </div>

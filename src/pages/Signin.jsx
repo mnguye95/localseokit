@@ -3,7 +3,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import { UserAuth } from '../context/AuthContext';
 
 const Signin = () => {
-  document.body.style.background = '#EBF2F8';
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -42,7 +41,7 @@ const Signin = () => {
             <Link className='underline font-bold text-[#00df9a]' to='/register'>Forgot password?</Link>
           </div>
           <div className='mt-6 text-center'>
-            <Link className='underline font-bold text-[#00df9a]' to='/register'>Don't have an account? Create one.</Link>
+           Don't have an account? <Link className='underline font-bold text-[#00df9a]' to='/register'>Create one.</Link>
           </div>
       </div>
     </div>
