@@ -3,7 +3,8 @@ import {
     createUserWithEmailAndPassword,
     signInWithEmailAndPassword,
     signOut,
-    onAuthStateChanged
+    onAuthStateChanged,
+    sendPasswordResetEmail
 } from "firebase/auth";
 import { auth } from '../firebase';
 
@@ -13,6 +14,10 @@ export const AuthContextProvider = ({children}) => {
     const [user, setUser] = useState({})
     const createUser = (email, password) => {
         return createUserWithEmailAndPassword(auth, email, password)
+    }
+
+    const forgotPassword = (email) => {
+        return sendPasswordResetEmail(auth, email)
     }
 
     const logIn = (email, password) => {
@@ -34,7 +39,7 @@ export const AuthContextProvider = ({children}) => {
     },[])
 
     return (
-        <UserContext.Provider value={{createUser, user, logOut, logIn}}>
+        <UserContext.Provider value={{createUser, user, logOut, logIn, forgotPassword}}>
             {children}
         </UserContext.Provider>
     )

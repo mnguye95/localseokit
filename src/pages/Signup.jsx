@@ -11,16 +11,24 @@ const Signup = () => {
   const {createUser} = UserAuth();
   const navigate = useNavigate();
 
+  function validate(email) {
+    return /\S+@\S+\.\S+/.test(email);
+  }
+
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    setError('')
-    try {
-      await createUser(email, password)
-      navigate('/account')
-    } catch (e) {
-      setError(e.message)
-      console.log(e.message)
-      console.log(error)
+    if (validate(email)) {
+      e.preventDefault();
+      setError('')
+      try {
+        await createUser(email, password)
+        navigate('/account')
+      } catch (e) {
+        setError(e.message)
+        console.log(e.message)
+      }
+    } else {
+      e.preventDefault();
+      setError('Please enter a valid email')
     }
   }
 
@@ -33,7 +41,8 @@ const Signup = () => {
         <div className='md:col-span-2 col-span-1'>
           <div className='bg-white p-10 mx-1 border-2 border-gray-200'>
             <h6 className="lg:text-4xl md:text-2xl text-xl pb-4 font-sans font-bold text-center">Start your 14 day free trial</h6>
-            <form onSubmit={handleSubmit} action='/' className='text-center'>
+            {error && <div className='border-rose-600 bg-rose-200 text-rose-500 rounded-md p-2 text-center'>{error}</div>}
+            <form onSubmit={handleSubmit} className='text-center'>
               <div className='flex flex-col py-2'>
                 <input className='border p-3 m-2' type='text' placeholder='First and Last Name *'/>
                 <input onChange={(e) => setEmail(e.target.value)} className='border p-3 m-2' type='email' placeholder='Email Address *'/>
@@ -42,11 +51,11 @@ const Signup = () => {
                 <input className='border p-3 m-2' type='text' placeholder='Website URL *'/>
                 <input className='border p-3 m-2' type='text' placeholder='Phone Number *'/>
               </div>
-              <button type='success' className='bg-[#00df9a] w-full rounded-md text-lg font-medium mx-auto my-3 p-6 text-white'>Create Your Account &nbsp; ▶</button>
+              <button type='success' className='bg-[#00df9a] w-full rounded-md text-lg font-medium mx-auto my-3 p-6 text-white'>Create Your Account &nbsp; &rarr;</button>
             </form>
           </div>
           <div className='mt-6 text-center'>
-            Already have an account? <Link className='underline font-bold text-[#00df9a]' to='/signin'>Login here</Link>
+            Already have an account? <Link className='cursor-pointer hover:underline font-bold text-[#00df9a]' to='/signin'>Login here</Link>
           </div>
         </div>
         <div className='col-span-1 w-full'>

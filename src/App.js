@@ -2,7 +2,6 @@ import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Signin from './pages/Signin';
 import Signup from './pages/Signup';
-import Account from './pages/Account';
 import Dashboard from './pages/Dashboard';
 import ProtectedRoute from './components/ProtectedRoute'
 
@@ -18,8 +17,8 @@ function App() {
           <Route path='/' element={<Front/>}/>
           <Route path='/signin' element={<Signin/>}/>
           <Route path='/register' element={<Signup/>}/>
-          <Route path='/account' element={<ProtectedRoute><Account/></ProtectedRoute>}/>
-          <Route path='/dashboard' element={<ProtectedRoute><Dashboard/></ProtectedRoute>}/>
+          <Route path='/account' element={<ProtectedRoute><Dashboard view="Settings"/></ProtectedRoute>}/>
+          <Route path='/dashboard' element={<ProtectedRoute><Dashboard view="Dashboard"/></ProtectedRoute>}/>
         </Routes>
       </AuthContextProvider>
     </div>
