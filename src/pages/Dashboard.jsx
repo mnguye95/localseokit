@@ -36,7 +36,7 @@ const Dashboard = (props) => {
     <div className="flex">
       <Sidebar setView={setView}/>
       {/* Dashboard View */}
-      <div className="min-h-screen grid lg:grid-cols-2 gap-6 p-7 bg-purple-100 w-screen">{handleNav(view)}</div>
+      {handleNav(view)}
     </div>
   );
 };
