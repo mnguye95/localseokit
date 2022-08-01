@@ -16,9 +16,9 @@ const Dashboard = (props) => {
     switch (view) {
       case "SEO Audit":
         return <SEOAuditView />;
-      case "Meta & Schema":
+      case "Meta Generator":
         return <DescriptionView />;
-      case "AI Blog Suggest":
+      case "Blog Suggestions":
         return <AiBlogView />;
       case "Image Local Geotag":
         return <GeotagView />;

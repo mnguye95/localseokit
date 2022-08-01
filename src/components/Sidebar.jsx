@@ -39,7 +39,7 @@ const Sidebar = (props) => {
       ),
     },
     {
-      title: "Meta & Schema",
+      title: "Meta Generator",
       src: (
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -58,7 +58,7 @@ const Sidebar = (props) => {
       ),
     },
     {
-      title: "AI Blog Suggest",
+      title: "Blog Suggestions",
       src: (
         <svg
           xmlns="http://www.w3.org/2000/svg"

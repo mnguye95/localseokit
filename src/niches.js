@@ -2163,7 +2163,7 @@ export default [
     "Colonics",
     "Compressor Repair",
     "Cranes",
-    "heavy Equipment Rental",
+    "Heavy Equipment Rental",
     "Cremation services",
     "Dancing Lessons",
     "Waterproofing",

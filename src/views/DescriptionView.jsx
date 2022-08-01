@@ -44,7 +44,7 @@ const DescriptionView = () => {
     <div className="min-h-screen grid gap-6 p-7 w-screen overflow-auto">
       <div className="bg-white w-full flex flex-col">
         <h1 className="lg:text-6xl md:text-4xl text-2xl font-bold my-6 text-center">
-          Meta Suggestions
+          Meta Generator
         </h1>
         <form onSubmit={handleSubmit} className="text-center">
           <div className="flex flex-col py-2 ">
@@ -55,15 +55,6 @@ const DescriptionView = () => {
               type="text"
               placeholder="Target Location of Service"
             />
-            <select
-              onChange={handleNiche}
-              value={niche}
-              className="border border-black-900 p-3 md:mx-10 mx-5 mb-5"
-              type="text"
-            >
-              <option value="select">Select</option>
-              <option value="s">s</option>
-            </select>
           </div>
           <button
             type="success"
