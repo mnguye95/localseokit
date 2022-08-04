@@ -1,10 +1,13 @@
 import { React, useState } from "react";
+import SubmitButton from "../components/SubmitButton";
+import { UserAuth } from "../context/AuthContext";
 
 const SEOAuditView = () => {
   const [url, setUrl] = useState("");
-  const [details, setDetails] = useState();
+  const [report, setReport] = useState();
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const { details, updateUsage, navigate } = UserAuth();
 
   const handleUrl = (url) => {
     setUrl(url);
@@ -18,7 +21,7 @@ const SEOAuditView = () => {
     if (url.indexOf("http://") !== 0 && url.indexOf("https://") !== 0) {
       temp = "https://" + url;
     }
-    fetch("http://127.0.0.1:8000/audit", {
+    fetch(process.env.REACT_APP_SERVICE_URL + "/audit", {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -29,10 +32,13 @@ const SEOAuditView = () => {
       }),
     })
       .then((response) => {
+        if (response.ok) {
+          updateUsage('audit');
+        }
         return response.json();
       })
       .then((data) => {
-        setDetails(data);
+        setReport(data);
       })
       .catch((error) => {
         console.log(error)
@@ -59,48 +65,46 @@ const SEOAuditView = () => {
               placeholder="Website URL"
             />
           </div>
-          {!isLoading ? 
-          <button
-            type="success"
-            className="bg-[#00df9a] rounded-md text-lg font-medium mx-auto my-4 p-3 text-white"
-          >
-            Analyze Website
-          </button> : <button
-            type="success"
-            onClick={() => {return false;}}
-            className="bg-[#00df9a] rounded-md text-lg font-medium mx-auto my-4 p-3 text-white cursor-not-allowed"
-          >
-            Loading...
-          </button>
-          }
+          <SubmitButton
+            uses={details.services.audit.uses}
+            limit={details.services.audit.limit}
+            isLoading={isLoading}
+            navigate={navigate}
+            />
+            {
+                <p className="text-gray-300 font-medium text-xl">
+                  Usage: {details.services.audit.uses} /{" "}
+                  {details.services.audit.limit}
+                </p>
+              }
         </form>
-        {details &&
+        {report &&
           <div className="bg-cyan-100 m-4 p-4 rounded-lg md:text-left text-center">
             <p className="lg:text-2xl text-xl font-bold">
               Title:{" "}
               <span className="text-blue-700 lg:text-2xl text-md">
-                {details.title}
+                {report.title}
               </span>
             </p>
             <p className="lg:text-2xl text-xl font-bold my-6">
               Description:{" "}
               <span className="text-blue-700 lg:text-2xl text-md">
-                {details.description}
+                {report.description}
               </span>
             </p>
-            {details.error_count > 0 ? <p className="lg:text-2xl text-xl font-bold my-6">
+            {report.error_count > 0 ? <p className="lg:text-2xl text-xl font-bold my-6">
               Errors:{" "}
               <span className="text-red-400 lg:text-2xl text-md">
-                {details.error_count}
+                {report.error_count}
               </span>
             </p> : ''}
             <p>{}</p>
             <ul>
-              {Object.keys(details.warnings).map((warning) => (
+              {Object.keys(report.warnings).map((warning) => (
                 <li className="pb-2" key={warning}>
                 <div>
-                  <p className="text-black-400 lg:text-xl text-sm py-4">{`(${details.warnings[warning].count})`} {warning}</p>
-                  {details.warnings[warning].result.length > 0 && <textarea className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" name={warning} id="" rows="4" value={details.warnings[warning].result.map((err) => (
+                  <p className="text-black-400 lg:text-xl text-sm py-4">{`(${report.warnings[warning].count})`} {warning}</p>
+                  {report.warnings[warning].result.length > 0 && <textarea className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" name={warning} id="" rows="4" readOnly value={report.warnings[warning].result.map((err) => (
                     err
                   )).join('\n')}/>}
                 </div>

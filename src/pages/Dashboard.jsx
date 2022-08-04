@@ -1,12 +1,12 @@
 import { React, useState } from "react";
 // import { UserAuth } from "../context/AuthContext";
-import AiBlogView from "../views/AiBlogView";
+import BlogSuggestions from "../views/BlogSuggestions";
 import DashboardView from "../views/DashboardView";
-import DescriptionView from "../views/DescriptionView";
-import SEOAuditView from "../views/SEOAuditView";
+import MetaGenerator from "../views/MetaGenerator";
+import SEOAudit from "../views/SEOAudit";
 import GeotagView from "../views/GeotagView";
 import FilesView from "../views/FilesView";
-import SettingsView from "../views/SettingsView";
+import Settings from "../views/Settings";
 import Sidebar from "../components/Sidebar";
 
 const Dashboard = (props) => {
@@ -15,17 +15,17 @@ const Dashboard = (props) => {
   const handleNav = (view) => {
     switch (view) {
       case "SEO Audit":
-        return <SEOAuditView />;
+        return <SEOAudit />;
       case "Meta Generator":
-        return <DescriptionView />;
+        return <MetaGenerator />;
       case "Blog Suggestions":
-        return <AiBlogView />;
+        return <BlogSuggestions />;
       case "Image Local Geotag":
         return <GeotagView />;
       case "Files":
         return <FilesView />;
       case "Settings":
-        return <SettingsView />;
+        return <Settings />;
       default:
         return <DashboardView />;
     }
