@@ -1,4 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
+import { auth } from "../firebase";
+import { db } from "../firebase";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -7,8 +9,6 @@ import {
   sendPasswordResetEmail,
   sendEmailVerification,
 } from "firebase/auth";
-import { auth } from "../firebase";
-import { db } from "../firebase";
 import {
   doc,
   updateDoc,
@@ -20,13 +20,12 @@ import {
 } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 
-
 const UserContext = createContext();
 
 export const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState({});
   const navigate = useNavigate();
-  const [details, setDetails] = useState({
+  const [details, setDetails] = useState(JSON.parse(localStorage.getItem('details')) || {
     id: "",
     uid: "",
     details: {
@@ -54,6 +53,11 @@ export const AuthContextProvider = ({ children }) => {
       },
     },
   });
+
+  const handleDetails = (details) => {
+    window.sessionStorage.setItem("details", details);
+    setDetails(details)
+  }
 
   const createUser = (email, password, info) => {
     return createUserWithEmailAndPassword(auth, email, password).then(
@@ -84,7 +88,7 @@ export const AuthContextProvider = ({ children }) => {
           };
           const docRef = await addDoc(collection(db, "usage"), newUser);
           console.log("Document written with ID: ", docRef.id);
-          setDetails({...newUser, id: docRef.id});
+          handleDetails({...newUser, id: docRef.id});
         } catch (e) {
           console.error("Error adding document: ", e);
         }
@@ -125,7 +129,7 @@ export const AuthContextProvider = ({ children }) => {
           querySnapshot.forEach((doc) => {
             limit.push({ ...doc.data(), id: doc.id });
           });
-          setDetails(limit[0]);
+          handleDetails(limit[0]);
         });
         return () => unsubscribe();
       }
@@ -140,6 +144,18 @@ export const AuthContextProvider = ({ children }) => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       // console.log(currentUser)
       setUser(currentUser);
+      const q = query(
+        collection(db, "usage"),
+        where("uid", "==", currentUser.uid)
+      );
+      const unsubscribe = onSnapshot(q, (querySnapshot) => {
+        let limit = [];
+        querySnapshot.forEach((doc) => {
+          limit.push({ ...doc.data(), id: doc.id });
+        });
+        handleDetails(limit[0]);
+      });
+      return () => unsubscribe();
     });
     return () => {
       unsubscribe();

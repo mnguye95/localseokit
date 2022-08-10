@@ -1,17 +1,20 @@
 import { React, useState } from "react";
 import { usePlacesWidget } from "react-google-autocomplete";
+import SubmitButton from "../components/SubmitButton";
 import GoogleMap from "../components/GoogleMap";
 import FileUpload from "../components/FileUpload";
 import { UserAuth } from "../context/AuthContext";
 
 const GeotagView = () => {
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
   const [location, setLocation] = useState({
     name: "",
     lat: 0,
     lng: 0,
   });
 
-  const { details, updateUsage } = UserAuth();
+  const { details, updateUsage, navigate } = UserAuth();
 
   const { ref } = usePlacesWidget({
     apiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
@@ -25,25 +28,41 @@ const GeotagView = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    var temp = "";
+    setIsLoading(true);
+    var formData = new FormData();
+    formData.append("image", selectedImage);
+    formData.append("name", location.name);
+    formData.append("lat", location.lat);
+    formData.append("lng", location.lng);
+    console.log(formData);
     fetch(process.env.REACT_APP_SERVICE_URL + "/geotag", {
       method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        url: temp,
-      }),
+      // headers : {
+      //   'Content-Type': 'application/json',
+      //   'Accept': 'application/json'
+      //  },
+      body: formData,
     })
       .then((response) => {
         if (response.ok) {
           updateUsage("images");
-          return response.json();
+          // return URL.createObjectURL(new Blob([response.data], { type: 'image/jpeg' })
+          // );
+          return response.blob();
         }
       })
       .then((data) => {
-        // setDetails(data);
+        var fileURL = window.URL.createObjectURL(data);
+
+        var fileLink = document.createElement("a");
+        fileLink.href = fileURL;
+
+        fileLink.download = location.name + ".jpg";
+
+        fileLink.click();
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   };
   return (
@@ -59,14 +78,17 @@ const GeotagView = () => {
           </p>
         }
       </div>
-      <div className="md:flex p-7 w-full">
-        <div className="bg-white w-full ">
-          <h3 className="lg:text-2xl md:text-xl text-md font-bold my-6 text-center">
+      <div className="flex flex-col">
+        <div className="bg-white w-full">
+          <h3 className="lg:text-2xl md:text-xl text-md font-bold md:my-6 text-center">
             Step 1: Upload JPG files
           </h3>
-          <FileUpload />
+          <FileUpload
+            setSelectedImage={setSelectedImage}
+            selectedImage={selectedImage}
+          />
         </div>
-        <div className="bg-white w-full">
+        <div className="bg-white w-full max-w-[768px] mx-auto">
           <h3 className="lg:text-2xl md:text-xl text-md font-bold my-6 text-center">
             Step 2: Locate City
           </h3>
@@ -79,19 +101,22 @@ const GeotagView = () => {
                 placeholder="Target Location of Service"
               />
             </div>
-            <button
-              type="success"
-              className="bg-[#00df9a] rounded-md text-lg font-medium px-8 mx-auto my-4 p-3 text-white"
-            >
-              Process
-            </button>
+            <SubmitButton
+              uses={details.services.images.uses}
+              limit={details.services.images.limit}
+              isLoading={isLoading}
+              navigate={navigate}
+              text={"Process"}
+            />
           </form>
-          {/* <GoogleMap
-            className="w-full p-7"
-            name={location.name}
-            lat={location.lat}
-            lng={location.lng}
-          /> */}
+          {location.name && (
+            <GoogleMap
+              className="w-full p-7"
+              name={location.name}
+              lat={location.lat}
+              lng={location.lng}
+            />
+          )}
         </div>
       </div>
     </div>

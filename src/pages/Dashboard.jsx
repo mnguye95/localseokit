@@ -10,9 +10,12 @@ import Settings from "../views/Settings";
 import Sidebar from "../components/Sidebar";
 
 const Dashboard = (props) => {
-  const [view, setView] = useState(props.view);
+  const [view, setView] = useState(JSON.parse(localStorage.getItem('view')) || 'Dashboard');
+
+  console.log(view);
 
   const handleNav = (view) => {
+    window.sessionStorage.setItem("view", view);
     switch (view) {
       case "SEO Audit":
         return <SEOAudit />;

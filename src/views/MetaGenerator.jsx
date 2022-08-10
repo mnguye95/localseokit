@@ -11,7 +11,7 @@ const MetaGenerator = () => {
   const [error, setError] = useState("");
 
   const { details, updateUsage } = UserAuth();
-  
+
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
@@ -54,10 +54,16 @@ const MetaGenerator = () => {
 
   return (
     <div className="min-h-screen grid gap-6 p-7 w-full overflow-auto">
-      <div className="bg-white w-full flex flex-col">
-        <h1 className="lg:text-6xl md:text-4xl text-2xl font-bold my-6 text-center">
+      <div className="bg-white w-full flex flex-col text-center">
+        <h1 className="lg:text-6xl md:text-4xl text-2xl font-bold my-6 ">
           Meta Generator
-        </h1>
+        </h1>{" "}
+        {
+          <p className="text-gray-300 font-medium text-xl">
+            Usage: {details.services.descriptions.uses} /{" "}
+            {details.services.descriptions.limit}
+          </p>
+        }
         {error ? (
           <div className="border rounded-md border-red-500 bg-red-100 text-red-600 p-3 md:mx-10 mx-5">
             {error}
@@ -74,12 +80,6 @@ const MetaGenerator = () => {
               suggestions={niches}
               navigate={navigate}
             />
-            {
-              <p className="text-gray-300 font-medium text-xl">
-                Usage: {details.services.descriptions.uses} /{" "}
-                {details.services.descriptions.limit}
-              </p>
-            }
           </div>
         </form>
         {description && (

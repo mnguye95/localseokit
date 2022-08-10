@@ -20,7 +20,7 @@ function App() {
           <Route path='/register' element={<Signup/>}/>
           <Route path='/pricing-plans' element={<Pricing />}/>
           <Route path='/account' element={<ProtectedRoute><Dashboard view="Settings"/></ProtectedRoute>}/>
-          <Route path='/dashboard' element={<ProtectedRoute><Dashboard view="Dashboard"/></ProtectedRoute>}/>
+          <Route path='/dashboard' element={<ProtectedRoute><Dashboard /></ProtectedRoute>}/>
         </Routes>
       </AuthContextProvider>
     </div>
