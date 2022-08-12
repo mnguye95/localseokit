@@ -117,6 +117,13 @@ export const AuthContextProvider = ({ children }) => {
     }).finally(() => console.log(details));
   };
 
+  const updateDetails = async (newDetails) => {
+    await updateDoc(doc(db, "usage", details.id), {
+      ...details,
+      details: newDetails
+    }).finally(() => console.log(details));
+  };
+
   const logIn = (email, password) => {
     return signInWithEmailAndPassword(auth, email, password).then(
       (UserCredentials) => {
@@ -161,7 +168,6 @@ export const AuthContextProvider = ({ children }) => {
       unsubscribe();
     };
   }, []);
-
   return (
     <UserContext.Provider
       value={{
@@ -173,6 +179,7 @@ export const AuthContextProvider = ({ children }) => {
         forgotPassword,
         sendVerification,
         updateUsage,
+        updateDetails,
         navigate,
       }}
     >

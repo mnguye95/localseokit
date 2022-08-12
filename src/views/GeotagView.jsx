@@ -1,7 +1,7 @@
 import { React, useState } from "react";
-import { usePlacesWidget } from "react-google-autocomplete";
-import SubmitButton from "../components/SubmitButton";
+import Autocomplete from "react-google-autocomplete";
 import GoogleMap from "../components/GoogleMap";
+import SubmitButton from "../components/SubmitButton";
 import FileUpload from "../components/FileUpload";
 import { UserAuth } from "../context/AuthContext";
 
@@ -16,16 +16,6 @@ const GeotagView = () => {
 
   const { details, updateUsage, navigate } = UserAuth();
 
-  const { ref } = usePlacesWidget({
-    apiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
-    onPlaceSelected: (place) =>
-      setLocation({
-        name: place.formatted_address,
-        lat: place.geometry.location.lat(),
-        lng: place.geometry.location.lng(),
-      }),
-  });
-
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsLoading(true);
@@ -37,28 +27,18 @@ const GeotagView = () => {
     console.log(formData);
     fetch(process.env.REACT_APP_SERVICE_URL + "/geotag", {
       method: "POST",
-      // headers : {
-      //   'Content-Type': 'application/json',
-      //   'Accept': 'application/json'
-      //  },
       body: formData,
     })
       .then((response) => {
         if (response.ok) {
           updateUsage("images");
-          // return URL.createObjectURL(new Blob([response.data], { type: 'image/jpeg' })
-          // );
           return response.blob();
         }
       })
       .then((data) => {
-        var fileURL = window.URL.createObjectURL(data);
-
         var fileLink = document.createElement("a");
-        fileLink.href = fileURL;
-
+        fileLink.href = window.URL.createObjectURL(data);
         fileLink.download = location.name + ".jpg";
-
         fileLink.click();
       })
       .finally(() => {
@@ -66,7 +46,7 @@ const GeotagView = () => {
       });
   };
   return (
-    <div className="flex flex-col w-full">
+    <div className="flex flex-col w-full max-w-[1240px] md:mx-auto mx-0">
       <div className="flex flex-col p-7 justify-center text-center gap-2">
         <h1 className="lg:text-6xl md:text-4xl text-2xl font-bold">
           Image Local Geotag
@@ -79,45 +59,67 @@ const GeotagView = () => {
         }
       </div>
       <div className="flex flex-col">
-        <div className="bg-white w-full">
-          <h3 className="lg:text-2xl md:text-xl text-md font-bold md:my-6 text-center">
-            Step 1: Upload JPG files
-          </h3>
-          <FileUpload
-            setSelectedImage={setSelectedImage}
-            selectedImage={selectedImage}
-          />
-        </div>
-        <div className="bg-white w-full max-w-[768px] mx-auto">
-          <h3 className="lg:text-2xl md:text-xl text-md font-bold my-6 text-center">
-            Step 2: Locate City
-          </h3>
-          <form onSubmit={handleSubmit} className="text-center">
-            <div className="flex flex-col py-2 ">
-              <input
-                ref={ref}
-                className="border border-black-900 p-3 md:mx-10 mx-5 mb-5"
-                type="text"
-                placeholder="Target Location of Service"
+        {!selectedImage ? (
+          <div className="bg-white w-full">
+            <h3 className="lg:text-2xl md:text-xl text-md font-bold md:my-6 text-center">
+              Step 1: Upload JPG files
+            </h3>
+            <FileUpload
+              setSelectedImage={setSelectedImage}
+              selectedImage={selectedImage}
+            />
+          </div>
+        ) : (
+          <div className="bg-white w-full max-w-[768px] mx-auto">
+            <h3 className="lg:text-2xl md:text-xl text-md font-bold my-6 text-center">
+              Step 2: Locate City
+            </h3>
+            <div className="flex flex-col justify-center items-center">
+              <img
+                className="w-full p-3"
+                alt="/"
+                src={URL.createObjectURL(selectedImage)}
               />
+              <br />
+              <button
+                className="p-3 px-6 bg-red-500 text-white rounded-md mb-9 font-bold"
+                onClick={() => setSelectedImage(null)}
+              >
+                Remove
+              </button>
             </div>
-            <SubmitButton
-              uses={details.services.images.uses}
-              limit={details.services.images.limit}
-              isLoading={isLoading}
-              navigate={navigate}
-              text={"Process"}
-            />
-          </form>
-          {location.name && (
-            <GoogleMap
-              className="w-full p-7"
-              name={location.name}
-              lat={location.lat}
-              lng={location.lng}
-            />
-          )}
-        </div>
+            <form onSubmit={handleSubmit} className="text-center">
+              <div className="flex flex-col py-2 ">
+                <Autocomplete
+                  className="border border-black-900 p-3 md:mx-10 mx-5 mb-5"
+                  apiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}
+                  onPlaceSelected={(place) =>
+                    setLocation({
+                      name: place.formatted_address,
+                      lat: place.geometry.location.lat(),
+                      lng: place.geometry.location.lng(),
+                    })
+                  }
+                />
+              </div>
+              <SubmitButton
+                uses={details.services.images.uses}
+                limit={details.services.images.limit}
+                isLoading={isLoading}
+                navigate={navigate}
+                text={"Process"}
+              />
+            </form>
+            {location.name && (
+              <GoogleMap
+                className="w-full p-7"
+                name={location.name}
+                lat={location.lat}
+                lng={location.lng}
+              />
+            )}
+          </div>
+        )}
       </div>
     </div>
   );

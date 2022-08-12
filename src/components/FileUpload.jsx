@@ -43,22 +43,6 @@ const FileUpload = (props) => {
           }}
         />
       </label>}
-      {props.selectedImage && (
-        <div className="flex flex-col justify-center items-center">
-          <img
-            className="w-1/2"
-            alt="/"
-            src={URL.createObjectURL(props.selectedImage)}
-          />
-          <br />
-          <button
-            className="p-3 px-6 bg-red-500 text-white rounded-md mb-9 font-bold"
-            onClick={() => props.setSelectedImage(null)}
-          >
-            Remove
-          </button>
-        </div>
-      )}
     </div>
   );
 };
