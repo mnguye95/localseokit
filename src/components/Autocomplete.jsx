@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from "react";
 import PropTypes from "prop-types";
+import SubmitButton from '../components/SubmitButton';
 
 // Credits to https://www.digitalocean.com/community/tutorials/react-react-autocomplete
 
@@ -137,17 +138,16 @@ class Autocomplete extends Component {
           onChange={onChange}
           onKeyDown={onKeyDown}
           value={userInput}
-          className="border border-black-900 p-3 md:mx-[275px] mx-5 mb-5"
+          className="border border-black-900 p-3"
           placeholder="Enter your business category"
         />
-        <button
-            disabled={this.props.isLoading}
-            type='submit'
-            onClick={this.props.limit.services.descriptions.uses === this.props.limit.services.descriptions.limit ? (e)=>{ e.preventDefault(); this.props.navigate('/pricing-plans')} : ()=>{return false}}
-            className={`bg-[#00df9a] rounded-md text-lg font-medium mx-auto my-4 p-3 text-white ${this.props.limit.services.descriptions.uses < this.props.limit.services.descriptions.limit ? this.props.isLoading ? 'disabled' : '' : ''}`}
-          >
-            {this.props.limit.services.descriptions.uses < this.props.limit.services.descriptions.limit ? this.props.isLoading ? 'Loading...' : 'Generate Description' : 'Upgrade'}
-        </button>
+        <SubmitButton
+        isLoading={this.props.isLoading}
+        uses={this.props.uses}
+        limit={this.props.limit}
+        text={this.props.text}
+        navigate={this.props.navigate}
+        />
         {suggestionsListComponent}
       </Fragment>
     );

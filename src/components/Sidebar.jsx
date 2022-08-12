@@ -102,26 +102,6 @@ const Sidebar = (props) => {
       ),
     },
     {
-      title: "Files",
-      src: (
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="h-8 w-8 min-w-8 text-white"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          strokeWidth={2}
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"
-          />
-        </svg>
-      ),
-      gap: true,
-    },
-    {
       title: "Settings",
       src: (
         <svg
@@ -144,6 +124,7 @@ const Sidebar = (props) => {
           />
         </svg>
       ),
+      gap: true,
     },
     {
       title: "Log Out",
@@ -191,18 +172,16 @@ const Sidebar = (props) => {
             clipRule="evenodd"
           />
         </svg>
-        <div className="flex gap-x-4 items-center">
-          {/* Logo Image */}
-          <img
+        <div className="flex items-center">
+          <img 
             src={Logo}
             alt="/"
             className={`w-8 h-full ml-4 cursor-pointer duration-500 ${
               !open && "rotate-[-360deg]"
             }`}
           />
-          {/* Logo Text */}
           <p
-            className={`md:text-xl font-medium text-[#00df9a] origin-left duration-500 ${
+            className={`md:text-xl text-xs ml-2 font-medium text-[#00df9a] origin-left duration-500 ${
               !open && "scale-0"
             }`}
           >
@@ -217,17 +196,21 @@ const Sidebar = (props) => {
               className={`
                 ${!open && "justify-center"}
                 ${view === menu.title && "bg-gray-700"}
-              text-gray-300 text-sm flex items-center gap-x-4 cursor-pointer lg:p-3 ${open && 'pl-4'} p-1 mb-5 rounded-md hover:bg-gray-700 ${
+              text-gray-300 text-xs flex items-center gap-x-4 cursor-pointer lg:p-3 ${
+                open && "pl-4"
+              } p-1 mb-5 rounded-md hover:bg-gray-700 ${
                 menu.gap ? "mt-9" : "mt-2"
               }`}
               key={index}
               onClick={() => {
-                menu.title === "Log Out" ? handlelogOut() : props.setView(menu.title);
+                menu.title === "Log Out"
+                  ? handlelogOut()
+                  : props.setView(menu.title);
               }}
             >
               <div>{menu.src}</div>
               <span
-                className={`md:text-xl text-sm font-medium origin-left duration-300
+                className={`md:text-xl text-xs font-medium origin-left duration-300
                 ${!open && "hidden"}`}
               >
                 {menu.title}
