@@ -8,7 +8,7 @@ import Settings from "../views/Settings";
 import Sidebar from "../components/Sidebar";
 
 const Dashboard = (props) => {
-  const [view, setView] = useState(JSON.parse(localStorage.getItem('view')) || 'Dashboard');
+  const [view, setView] = useState(JSON.parse(localStorage.getItem('view')) || props.view || 'Dashboard');
 
   console.log(view);
 
