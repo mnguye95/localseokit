@@ -1,4 +1,4 @@
-import React from 'react'
+import {React, useRef} from 'react'
 import Cards from '../components/Cards';
 import Footer from '../components/Footer';
 import FortySixty from '../components/FortySixty';
@@ -7,11 +7,18 @@ import NavBar from '../components/NavBar';
 import Newsletter from '../components/Newsletter';
 
 const Front = () => {
+  const servicesRef = useRef();
+
+  const handleClick = () => {
+    servicesRef.current.scrollIntoView({ behavior: "smooth" });
+  }
+  
+
   return (
     <div className='bg-[#000300]'>
-      <NavBar/>
+      <NavBar handleClick={handleClick}/>
       <Hero/>
-      <FortySixty/>
+      <div ref={servicesRef}><FortySixty/></div>
       <Newsletter/>
       <Cards/>
       <Footer/>

@@ -2,7 +2,7 @@ import React from 'react'
 
 const Newsletter = () => {
   return (
-    <div className='w-full text-white py-16 px-16'>
+    <div className='w-full text-white p-16'>
         <div className='max-w-[1240px] mx-auto grid md:grid-cols-3'>
             <div className='md:col-span-2'>
                 <h1 className='md:text-4xl sm:text-3xl text-2xl  font-bold py-2'>Want tips and tricks to outrank your competitors?</h1>

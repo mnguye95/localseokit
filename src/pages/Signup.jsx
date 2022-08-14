@@ -53,7 +53,7 @@ const Signup = () => {
           </h2>
         </Link>
       </div>
-      <div className="grid md:grid-cols-3 mx-5">
+      <div className="grid md:grid-cols-3 mx-5 gap-x-8">
         <div className="md:col-span-2 col-span-1">
           <div className="bg-white p-10 mx-1 border-2 border-gray-200">
             <h6 className="lg:text-4xl md:text-2xl text-xl pb-4 font-sans font-bold text-center">
@@ -133,33 +133,28 @@ const Signup = () => {
           <div className="bg-white p-2 mx-0 md:mx-5 md:my-0 my-16 border-2 border-gray-200">
             <div className="flex flex-col p-7 mx-2 items-center border-b">
               <div className="flex p-2 items-center mb-2">
-                <h6 className="text-2xl pr-4 ">Pro Plan</h6>
+                <h6 className="text-2xl pr-4 ">Solo Plan</h6>
                 <a className="text-blue-500 font-medium" href="/">Change Plan</a>
-              </div>
-              <div className="flex">
-                <p className="font-medium text-sm text-center">
-                  Your Free Trial includes $30 in Usage Credit.
-                </p>
               </div>
             </div>
             <div className="p-7">
-              <p className="font-bold mb-2">What's also included?</p>
+              <p className="font-bold mb-6">What's also included?</p>
               <ul>
                 <li className="flex mb-5">
                   <FaCheck color="#00df9a" className="mr-3" />
-                  <p className="text-sm">Call, Form and Chat Tracking.</p>
+                  <p className="text-sm">SEO Audits.</p>
                 </li>
                 <li className="flex mb-5">
                   <FaCheck color="#00df9a" className="mr-3" />
-                  <p className="text-sm">Instant Call Tracking Numbers.</p>
+                  <p className="text-sm">Meta Descriptions.</p>
                 </li>
                 <li className="flex mb-5">
                   <FaCheck color="#00df9a" className="mr-3" />
-                  <p className="text-sm">Lead Management &amp; Reporting.</p>
+                  <p className="text-sm">Blog Suggestions.</p>
                 </li>
-                <li className="flex mb-5">
+                <li className="flex">
                   <FaCheck color="#00df9a" className="mr-3" />
-                  <p className="text-sm">Keyword &amp; Campaign Tracking.</p>
+                  <p className="text-sm">Add Geo-Data to Images.</p>
                 </li>
               </ul>
             </div>

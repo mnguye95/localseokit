@@ -81,7 +81,7 @@ export const AuthContextProvider = ({ children }) => {
               },
               images: {
                 uses: 0,
-                limit: 50,
+                limit: 15,
               },
             },
             details: info,
