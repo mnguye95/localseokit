@@ -5,6 +5,7 @@ import FortySixty from '../components/FortySixty';
 import Hero from '../components/Hero';
 import NavBar from '../components/NavBar';
 import Newsletter from '../components/Newsletter';
+import Clients from '../components/Clients'
 
 const Front = () => {
   const servicesRef = useRef();
@@ -18,6 +19,7 @@ const Front = () => {
     <div className='bg-[#000300]'>
       <NavBar handleClick={handleClick}/>
       <Hero/>
+      <Clients/>
       <div ref={servicesRef}><FortySixty/></div>
       <Newsletter/>
       <Cards/>
