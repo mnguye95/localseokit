@@ -78,8 +78,8 @@ const MetaGenerator = () => {
               setNiche={setNiche}
               suggestions={niches}
               navigate={navigate}
-              uses={details.services.suggestions.uses}
-              limit={details.services.suggestions.limit}
+              uses={details.services.descriptions.uses}
+              limit={details.services.descriptions.limit}
               text={'Generate Description'}
             />
           </div>
