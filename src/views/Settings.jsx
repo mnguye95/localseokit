@@ -108,6 +108,28 @@ const Settings = () => {
         </div>
         <div className="flex flex-row w-full my-5 items-center">
           <h3 className="lg:text-2xl md:text-xl text-xs font-bold w-1/4 text-center">
+            Blog Suggestions
+          </h3>
+          <div className="bg-gray-200 w-3/4 mx-2 rounded-full h-5">
+            <div
+              className={`bg-[#00df9a] h-5 text-xs font-medium text-white text-center p-0.5 justify-center leading-none rounded-full`}
+              style={{
+                width:
+                  Math.floor(
+                    (details.services.suggestions.uses /
+                      details.services.suggestions.limit) *
+                      100
+                  ) + "%",
+              }}
+            >
+              {" "}
+              {details.services.suggestions.uses} /{" "}
+              {details.services.suggestions.limit}
+            </div>
+          </div>
+        </div>
+        <div className="flex flex-row w-full my-5 items-center">
+          <h3 className="lg:text-2xl md:text-xl text-xs font-bold w-1/4 text-center">
             Images
           </h3>
           <div className="bg-gray-200 w-3/4 mx-2 rounded-full h-5">
