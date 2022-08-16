@@ -1,7 +1,7 @@
 import { React, useState } from "react";
 import Logo from "../assets/images/icon-transparent.png";
 import { UserAuth } from "../context/AuthContext";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 const Sidebar = (props) => {
   const [open, setOpen] = useState(true);
@@ -173,20 +173,20 @@ const Sidebar = (props) => {
           />
         </svg>
         <div className="flex items-center">
-          <img 
+        <Link to='/'><img 
             src={Logo}
             alt="/"
             className={`w-8 h-full ml-4 cursor-pointer duration-500 ${
               !open && "rotate-[-360deg]"
             }`}
-          />
-          <p
+          /></Link>
+          <Link to='/'><p
             className={`md:text-xl text-xs ml-2 font-medium text-[#00df9a] origin-left duration-500 ${
               !open && "scale-0"
             }`}
           >
             LocalSEOKit.
-          </p>
+          </p></Link>
         </div>
         {/* Nav Menu */}
         <ul className="pt-6">
