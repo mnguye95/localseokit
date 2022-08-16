@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 
 const Cards = () => {
   return (
-    <div className='w-full bg-white py-[10rem] px-4'>
+    <div className='w-full bg-white md:py-[10rem] py-[5rem] px-4'>
         <div className='max-w-[1240px] mx-auto grid md:grid-cols-3 gap-8'>
             <div className='w-full shadow-xl flex flex-col p-4 my-4 rounded-lg hover:scale-105 duration-300'>
                 <img className='w-20 mx-auto mt-[-3rem] bg-white' src={Single} alt="/" />
@@ -24,9 +24,9 @@ const Cards = () => {
             <div className='w-full shadow-xl bg-gray-100 flex flex-col p-4 md:my-0 my-8 rounded-lg hover:scale-105 duration-300'>
                 <img className='w-20 mx-auto mt-[-3rem] bg-transparent' src={Double} alt="/" />
                 <h3 className='text-2xl font-bold text-center py-8'>Business</h3>
-                <p className='text-center text-4xl font-bo6ld'>$9</p>
+                <p className='text-center text-4xl font-bold'>$9</p>
                 <div className='text-center font-medium'>
-                    <p className='py-2 border-b mx-8 mt-8'>All of Solo Features</p>
+                    <p className='py-2 border-b mx-8 mt-8 font-bold'>All of Solo Features</p>
                     <p className='py-2 border-b mx-8'>Access to API</p>
                     <p className='py-2 border-b mx-8'>24/7 Live Support</p>
                     <p className='py-2 border-b mx-8'>Whitelabel Features</p>
@@ -39,7 +39,7 @@ const Cards = () => {
                 <h3 className='text-2xl font-bold text-center py-8'>Enterprise</h3>
                 <p className='text-center text-4xl font-bold'>$12</p>
                 <div className='text-center font-medium'>
-                    <p className='py-2 border-b mx-8 mt-8'>All of Business Features</p>
+                    <p className='py-2 border-b mx-8 mt-8 font-bold'>All of Business Features</p>
                     <p className='py-2 border-b mx-8'>Live Agency Training</p>
                     <p className='py-2 border-b mx-8'>Mastermind SEO Group Access</p>
                     <p className='py-2 border-b mx-8'>Branding &amp; Marketing Audit</p>

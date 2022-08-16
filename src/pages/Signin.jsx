@@ -1,5 +1,5 @@
 import { React, useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { UserAuth } from "../context/AuthContext";
 
 const Signin = () => {
@@ -7,13 +7,13 @@ const Signin = () => {
   const [forgot, setForgot] = useState(false);
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const { user, logIn, forgotPassword } = UserAuth();
-  const navigate = useNavigate();
+  const { user, logIn, forgotPassword, navigate } = UserAuth();
 
   useEffect(() => {
     if (user) {
       navigate("/dashboard");
     }
+    // eslint-disable-next-line
   }, []);
 
   const handleSignIn = async (e) => {
@@ -24,8 +24,7 @@ const Signin = () => {
       navigate("/dashboard");
     } catch (er) {
       console.log(er.message);
-      setError(er.message);
-      console.log(error);
+      setError(er.message.split(':')[1]);
     }
   };
 
@@ -57,6 +56,11 @@ const Signin = () => {
               <h6 className="lg:text-4xl md:text-2xl text-xl pb-4 font-sans font-bold text-center">
                 Log into your account
               </h6>
+            {error && (
+              <div className="border-rose-600 bg-rose-200 text-rose-500 rounded-md p-2 mb-5 text-center">
+                {error}
+              </div>
+            )}
               <form onSubmit={handleSignIn} className="text-center">
                 <div className="flex flex-col py-2">
                   <input

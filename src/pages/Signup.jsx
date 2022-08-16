@@ -25,6 +25,7 @@ const Signup = () => {
     if (user) {
       navigate("/dashboard");
     }
+    // eslint-disable-next-line
   }, []);
 
   const handleSubmit = async (e) => {
@@ -70,14 +71,14 @@ const Signup = () => {
                   onChange={(e) => setDetails({...details, name : e.target.value})}
                   className="border p-3 m-2"
                   type="text"
-                  placeholder="First and Last Name *"
+                  placeholder="Name"
                   required
                 />
                 <input
                   onChange={(e) => setEmail(e.target.value)}
                   className="border p-3 m-2"
                   type="email"
-                  placeholder="Email Address *"
+                  placeholder="Email Address"
                   required
                 />
                 <input
@@ -89,7 +90,7 @@ const Signup = () => {
                   title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
                   required
                 />
-                <input
+                {/* <input
                   onChange={(e) => setDetails({...details, company : e.target.value})}
                   className="border p-3 m-2"
                   type="text"
@@ -109,7 +110,7 @@ const Signup = () => {
                   type="text"
                   placeholder="Phone Number *"
                   required
-                />
+                /> */}
               </div>
               <button
                 type="success"

@@ -62,7 +62,7 @@ const GeotagView = () => {
         {!selectedImage ? (
           <div className="bg-white w-full">
             <h3 className="lg:text-2xl md:text-xl text-md font-bold md:my-6 text-center">
-              Step 1: Upload JPG files
+              Step 1: Upload Image
             </h3>
             <FileUpload
               setSelectedImage={setSelectedImage}

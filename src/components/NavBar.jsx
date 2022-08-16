@@ -13,7 +13,7 @@ const NavBar = (props) => {
 
   return (
     <div className='flex justify-between items-center h-24 max-width-[1240px] lg:container mx-auto md:px-16 px-8 text-white'>
-        <h2 className='text-3xl font-bold text-[#00df9a]'>LocalSEOKit.</h2>
+        <Link to='/'><h2 className='text-3xl font-bold text-[#00df9a]'>LocalSEOKit.</h2></Link>
         {!user ? <ul className='hidden md:flex items-center'>
             <li className='p-4 '><button onClick={props.handleClick}>Services</button></li>
             <Link to='/signin'><li className='p-4 mr-6'>Sign In</li></Link>

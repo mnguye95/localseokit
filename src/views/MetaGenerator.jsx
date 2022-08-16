@@ -1,6 +1,6 @@
 import { React, useState } from "react";
 import Autocomplete from "../components/Autocomplete";
-import niches from "../niches";
+import niches from "../utility/niches";
 import { UserAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 
